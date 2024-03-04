@@ -12,14 +12,14 @@ This simulator comes in three parts,
 The default protocol used in this simulator is [LoRaLayer2](https://github.com/sudomesh/LoRaLayer2), find more details about the protocol on [our wiki](https://github.com/sudomesh/disaster-radio/wiki/Protocol).
 
 ## Prerequisites
-It is best to run this simulator on an Ubuntu 18.04 machine. It is unknown how it will perform on other operating systems, though it should be possible to run it on any given machine.  
+It is best to run this simulator on an Ubuntu 22.04 machine. It is unknown how it will perform on other operating systems, though it should be possible to run it on any given machine.  
 
 Install the dependencies for compiling the firmware,
 ```
 sudo apt update
-sudo apt install build-essential libwebsocketpp-dev libboost-dev libdw-dev libssl-dev
+sudo apt install build-essential libwebsocketpp-dev libboost-dev libdw-dev libssl-dev binutils-dev libboost-filesystem-dev libboost-filesystem-dev
 ```
-You will need version 7.10 of Node.js to run the simulator script and build the web app. it is recommended that you use something like [nvm](https://github.com/nvm-sh/nvm) to install the correct version of Node.js.
+You will need a fairly recent version of Node.js to run the simulator script and build the web app. The build procedure is confirmed to work with node v21.6.2.
 
 ## Router Firmware
 
@@ -100,8 +100,10 @@ This can be done for as many node as you would like to observe. Ideally, they sh
 Send broadcast messages from the any of the socat instances you have opened by typing your message an pressing enter. You can send a direct/routed message to a specific node by starting the message with `@<node address>`, node addresses can be copied from the routing table, which can be viewed by typing `/lora`. Watch the packet get forwarded by each node in the route in the visualizer. 
 
 # ToDo
-* expand visual interface (e.g. choose which nodes send/receive packets, inspect metrics and routing tables)
-* fix various bugs, https://github.com/sudomesh/disaster-radio-simulator/issues
+- [ ] expand visual interface (e.g. choose which nodes send/receive packets, inspect metrics and routing tables)
+- [ ] fix various bugs, https://github.com/sudomesh/disaster-radio-simulator/issues
+- [ ] improve fetch_deps.sh 
+- [ ] check the versions of libraries imported in fetch_deps.sh
 
 # License and copyright
 * Copyright 2020 Sudo Mesh

@@ -1,6 +1,6 @@
 //#define BACKWARD_HAS_DW 1
 #include "simulator.h"
-#include <backward.cpp>
+#include <backward.hpp>
 #include <Layer1_Sim.h>
 #include <LoRaLayer2.h>
 

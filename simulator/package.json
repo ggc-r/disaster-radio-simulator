@@ -9,15 +9,15 @@
   "dependencies": {
     "async": "^2.6.1",
     "emoji.json": "^11.0.0",
-    "http-server": "^0.11.1",
+    "http-server": "^14.1.1",
     "uuid": "^3.3.2",
     "ws": "^6.1.0",
     "xtend": "^4.0.1"
   },
   "devDependencies": {
     "browserify": "^15.2.0",
-    "d3": "^4.12.2",
-    "watchify": "^3.9.0"
+    "d3": "^7.8.5",
+    "watchify": "^4.0.0"
   },
   "license": "AGPL-3.0"
 }
