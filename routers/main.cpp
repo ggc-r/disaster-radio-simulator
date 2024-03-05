@@ -15,6 +15,8 @@
 // middleware
 #include "middleware/Console.h"
 
+#include<log.h>
+
 int nodeID = 1;
 std::string root = "../routers/static/";
 
@@ -42,37 +44,37 @@ int maxRandomDelay(){
 
 void setupLoRa()
 {
-  Serial.printf("* Initializing LoRaLayer2...\r\n");
+  log_info("* Initializing LoRaLayer2...\r\n");
   uint8_t* myAddress = LL2->localAddress();
   LoRaClient *lora_client = new LoRaClient(LL2);
   if (lora_client->init())
   {
-    Serial.printf(" --> init succeeded...");
+    log_info(" --> init succeeded...");
     nodeID = Layer1->nodeID();
-    Serial.printf("node ID: %i\r\n", nodeID);
+    log_info("node ID: %i\r\n", nodeID);
     radio->connect(lora_client);
     //loraInitialized = true;
     return;
   }
-  Serial.printf(" --> Failed to initialize LoRa\r\n");
+  log_info(" --> Failed to initialize LoRa\r\n");
 }
 
 void setupSocat()
 {
-  Serial.printf("* Initializing Serial...\r\n");
+  log_info("* Initializing Serial...\r\n");
 
   // append nodeID to tty port (used string out of convience)
   std::string port = "./tty/N";
   std::string number = std::to_string(nodeID);
   std::string portname = port + number;
 
-  Serial.printf(" --> connect to %s\r\n", portname.c_str());
+  log_info(" --> connect to %s\r\n", portname.c_str());
   SocatClient *socat_client = new SocatClient(portname);
   if(socat_client->init()){
-    Serial.printf(" --> Serial initialized and connected\r\n");
+    log_info(" --> Serial initialized and connected\r\n");
   }
   else{
-    Serial.printf(" --> Serial initialized, no device connected\r\n");
+    log_info(" --> Serial initialized, no device connected\r\n");
   }
   radio->connect(new Console())
     ->connect(socat_client);
@@ -81,20 +83,20 @@ void setupSocatSocket()
 {
   // Sets up an open socat connection that bypasses console
   // intended to be accessed by socatSocket.cpp
-  Serial.printf("* Initializing SocatSocket...\r\n");
+  log_info("* Initializing SocatSocket...\r\n");
 
   // append nodeID to tty port (used string out of convience)
   std::string port = "./tty/WS";
   std::string number = std::to_string(nodeID);
   std::string portname = port + number;
 
-  Serial.printf(" --> socatSocket available at %s\r\n", portname.c_str());
+  log_info(" --> socatSocket available at %s\r\n", portname.c_str());
   SocatClient *socat_client = new SocatClient(portname);
   if(socat_client->init()){
-    Serial.printf(" --> socatSocket initialized and connected\r\n");
+    log_info(" --> socatSocket initialized and connected\r\n");
   }
   else{
-    Serial.printf(" --> socatSocket initialized, no device connected\r\n");
+    log_info(" --> socatSocket initialized, no device connected\r\n");
   }
   radio->connect(socat_client);
 }
@@ -107,7 +109,7 @@ int setup(){
     setupSocatSocket();
     // random blocking wait at boot
     int wait = rand()%maxRandomDelay();
-    Serial.printf("[node %d] waiting %d s\n", nodeID, wait);
+    log_info("[node %d] waiting %d s\n", nodeID, wait);
     sleep(wait);
     return 0;
 }
@@ -134,7 +136,7 @@ int main(int argc, char **argv) {
                 Layer1->setNodeID(atoi(optarg));
                 break;
             default:
-                perror("Bad args\n");
+                log_error("Bad args");
                 return 1;
         }
     }

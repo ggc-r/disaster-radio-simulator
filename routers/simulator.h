@@ -8,13 +8,8 @@
 #include <sys/time.h>
 #include <Layer1_Sim.h>
 #include <LoRaLayer2.h>
+#include <log.h>
 
-typedef struct _serial {
-  int (*printf)(const char*, ...);
-} serial;
-
-extern serial Serial;
-extern serial debug;
 extern int nsleep(unsigned int secs, useconds_t usecs);
 
 int simulator_setup_loop();
