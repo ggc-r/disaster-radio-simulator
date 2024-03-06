@@ -102,6 +102,7 @@ Send broadcast messages from the any of the socat instances you have opened by t
 # ToDo
 - [ ] expand visual interface (e.g. choose which nodes send/receive packets, inspect metrics and routing tables)
 - [ ] fix various bugs, https://github.com/sudomesh/disaster-radio-simulator/issues
+- [ ] WIP rewrite the simulator layer 2 interface
 - [ ] improve fetch_deps.sh 
 - [ ] check the versions of libraries imported in fetch_deps.sh
 
